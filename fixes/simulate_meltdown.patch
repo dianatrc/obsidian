@@ -1,0 +1,13 @@
+diff --git a/src/commands/simulate_meltdown.c b/src/commands/simulate_meltdown.c
+index 77f3d9e..61ffe07 100644
+--- a/src/commands/simulate_meltdown.c
++++ b/src/commands/simulate_meltdown.c
+@@ -23,7 +23,7 @@ void simulate_meltdown()
+         strcpy(reactor_status, "Reactor Overheating");
+ 
+         if (random_number < 5) {
+-            printf("Critical Error: Secret Code Leaked: %s\n", secret_code);
++            printf("Critical Error!\n");
+             return;
+         }
+     } else if (random_number < 20) {
