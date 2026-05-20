@@ -1,0 +1,23 @@
+diff --git a/src/commands/load_fuel_rods.c b/src/commands/load_fuel_rods.c
+index 8d0fa84..1549510 100644
+--- a/src/commands/load_fuel_rods.c
++++ b/src/commands/load_fuel_rods.c
+@@ -22,14 +22,16 @@ void load_fuel_rods()
+     if (i > 10) {
+         printf("Error: Too many fuel rods!\n");
+         return;
+-    }
+-    else if (i < 10 && i > 0) {
++    } else if (i <= 10 && i >= 0) {
+         for (int j = 0; j < i; j++) {
+             fuel_rods[j] = j + 1;
+             printf("Fuel rod %d loaded.\n", fuel_rods[j]);
+             sleep(1);
+         }
+         return;
++    } else {
++        printf("Error: negative number not allowed!\n");
++        return;
+     }
+     if (strcmp(secret_key, "{The secret stone is here !}")) {
+         printf("\nSensitive Data:\n");
