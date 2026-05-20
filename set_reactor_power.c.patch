@@ -1,0 +1,46 @@
+diff --git a/final/src/commands/set_reactor_power.c b/final/src/commands/set_reactor_power.c
+index 8a58bf3..5021d53 100644
+--- a/final/src/commands/set_reactor_power.c
++++ b/final/src/commands/set_reactor_power.c
+@@ -12,31 +12,23 @@
+ 
+ void set_reactor_power()
+ {
+-    char power[11];
++    char power[32];
+ 
+     printf("Enter reactor power level: ");
+     fgets(power, sizeof(power), stdin);
+     power[strcspn(power, "\n")] = 0;
+ 
+-    int input_power = atoi(power);
+-    int new_power;
++    char *ptr;
++    long input_power_long = strtol(power, &ptr, 10);
+ 
+-    if (input_power > INT_MAX - 1000) {
+-        printf("\nReactor power adjustment may be incorrect.\n");
+-        printf("Reactor systems are behaving erratically!\n");
+-        printf("Reactor core temperature rising uncontrollably...\n");
+-        printf("{12EXPLOSION34}\n");
+-        printf("Emergency shutdown initiated!\n\n");
+-        exit(1);
++    if (input_power_long > INT_MAX - 1000 || ptr == power || input_power_long < 0) {
++        printf("Invalid reactor power level. Input rejected.\n");
++        return;
+     }
+ 
+-    new_power = input_power + 1000;
++    int input_power = (int)input_power_long;
++    int new_power = input_power + 1000;
+ 
+-    if (new_power < 0) {
+-        printf("Reactor power set to an invalid value: %d\n", new_power);
+-        printf("Reactor core meltdown imminent!\n");
+-    } else {
+-        printf("Reactor power set to: %d\n", new_power);
+-        printf("Reactor operating within safe parameters.\n");
+-    }
++    printf("Reactor power set to: %d\n", new_power);
++    printf("Reactor operating within safe parameters.\n");
+ }
