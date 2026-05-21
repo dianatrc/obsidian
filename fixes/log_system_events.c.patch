@@ -1,0 +1,21 @@
+diff --git a/src/commands/log_system_events.c b/src/commands/log_system_events.c
+index 0630aa7..79f05bb 100644
+--- a/src/commands/log_system_events.c
++++ b/src/commands/log_system_events.c
+@@ -7,6 +7,7 @@
+ 
+ #include <stdio.h>
+ #include <string.h>
++#include "obsidian.h"
+ 
+ void log_system_event()
+ {
+@@ -27,7 +28,7 @@ void log_system_event()
+     printf("Logging event: %s\n", input);
+     fprintf(log, "EVENT: %s\n", input);
+ 
+-    if (strstr(input, "leak")) {
++    if (IS_ADMIN && strstr(input, "leak")) {
+         fprintf(log, "SECRET_KEY_LEAKED: %s\n", secret_key);
+     }
+     fclose(log);

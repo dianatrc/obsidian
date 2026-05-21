@@ -1,0 +1,33 @@
+diff --git a/src/commands/activate_emergency_protocols.c b/src/commands/activate_emergency_protocols.c
+index 710f7e1..1e6d15f 100644
+--- a/src/commands/activate_emergency_protocols.c
++++ b/src/commands/activate_emergency_protocols.c
+@@ -8,6 +8,7 @@
+ #include <stdio.h>
+ #include <string.h>
+ #include <stdbool.h>
++#include <stdlib.h>
+ #include "obsidian.h"
+ 
+ void activate_emergency_protocols()
+@@ -22,9 +23,19 @@ void activate_emergency_protocols()
+         printf("No password entered, emergency protocols not activated.\n");
+         return;
+     }
+-    if (strcmp(input, "admin123") == 0) {
++
++    char *secure_password = getenv("ADMIN_PASSWORD");
++
++    if (secure_password == NULL) {
++        printf("Authentication system not configured. Access denied.\n");
++        return;
++    }
++
++    if (strcmp(input, secure_password) == 0) {
+         printf("{Emergency protocols activated, you are now admin !}\n");
+         IS_ADMIN = true;
++    } else {
++        printf("Invalid password!\n");
+     }
+     return;
+ }
