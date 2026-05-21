@@ -1,0 +1,15 @@
+diff --git a/src/commands/check_cooling_pressure.c b/src/commands/check_cooling_pressure.c
+index 9953089..44be4fa 100644
+--- a/src/commands/check_cooling_pressure.c
++++ b/src/commands/check_cooling_pressure.c
+@@ -39,8 +39,9 @@ void check_cooling_pressure()
+     sleep(1);
+     log_pressure_status(data);
+     free(data);
++    data = NULL;
+     sleep(3);
+-    if (strcmp(data, "Pressure OK")) {
++    if (data != NULL && strcmp(data, "Pressure OK")) {
+         printf("Sensitive Info: %s\n", sensitive_info);
+     }
+     char temp_buffer[32];

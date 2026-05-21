@@ -1,0 +1,33 @@
+diff --git a/src/commands/run_diagnostic.c b/src/commands/run_diagnostic.c
+index 03cae9e..f3573f9 100644
+--- a/src/commands/run_diagnostic.c
++++ b/src/commands/run_diagnostic.c
+@@ -8,6 +8,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include "obsidian.h"
+ 
+ void run_diagnostic()
+ {
+@@ -21,7 +22,8 @@ void run_diagnostic()
+     input[strcspn(input, "\n")] = '\0';
+ 
+     if (strcmp(input, "debug") == 0) {
+-        data = (int *)sensitive_info;
++        diagnostic_code = 1001;
++        data = &diagnostic_code;
+     } else if (strcmp(input, "advanced") == 0) {
+         diagnostic_code = rand() % 1000;
+         data = &diagnostic_code;
+@@ -32,8 +34,8 @@ void run_diagnostic()
+ 
+     if (data == NULL) {
+         printf("Error: Diagnostic data is unavailable (NULL pointer).\n");
+-    } else if (data == (int *)sensitive_info) {
+-        printf("Diagnostic result: %s\n", (char *)data);
++    } else if (IS_ADMIN && *data == 1001) {
++        printf("Diagnostic result: %s\n", sensitive_info);
+     } else {
+         printf("Diagnostic result: Code %d\n", *data);
+     }
