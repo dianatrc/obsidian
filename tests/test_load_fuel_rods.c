@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2026
+** Obsidian
+** File description:
+** Unit tests for the load_fuel_rods command
+*/
+
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 #include "obsidian.h"
